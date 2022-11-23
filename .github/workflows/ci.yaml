@@ -44,7 +44,7 @@ jobs:
       - name: Build
         run: |
           npm run build -- \
-            --site "${{ steps.pages.outputs.origin }}"
+            --site "${{ steps.pages.outputs.origin }}" \
             --base "${{ steps.pages.outputs.base_path }}"
 
   deploy:
