@@ -23,9 +23,11 @@ jobs:
         working-directory: ${{ env.BUILD_PATH }}
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: "18"
           cache: npm
@@ -41,11 +43,16 @@ jobs:
         id: pages
         uses: actions/configure-pages@v2
 
-      - name: Build
+      - name: Build static site
         run: |
           npm run build -- \
             --site "${{ steps.pages.outputs.base_url }}" \
             --base "${{ steps.pages.outputs.base_path }}"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ${{ env.BUILD_PATH }}/dist
 
   deploy:
     if: github.ref == 'refs/heads/main'
