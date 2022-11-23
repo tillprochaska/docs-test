@@ -1,0 +1,24 @@
+{
+  "title": "Docs Test",
+  "git": {
+    "branch": "main",
+    "githubRepoUrl": "https://github.com/tillprochaska/docs-test"
+  },
+  "nav": {
+    "header": {
+      "items": []
+    },
+    "sidebar": {
+      "sections": [
+        {
+          "title": "Welcome",
+          "items": [
+            { "slug": "/" },
+            { "slug": "/page-two" },
+            { "slug": "/page-three" }
+          ]
+        }
+      ]
+    }
+  }
+}
