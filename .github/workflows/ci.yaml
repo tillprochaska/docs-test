@@ -18,6 +18,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ${{ env.BUILD_PATH }}
+
     steps:
       - uses: actions/checkout@v3
 
@@ -41,7 +45,6 @@ jobs:
           npm run build -- \
             --site "${{ steps.pages.outputs.origin }}"
             --base "${{ steps.pages.outputs.base_path }}"
-        working-directory: ${{ env.BUILD_PATH }}
 
   deploy:
     if: github.ref == 'refs/heads/main'
