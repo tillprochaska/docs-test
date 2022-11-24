@@ -10,7 +10,6 @@ concurrency:
 
 jobs:
   docs:
-    name: Build and deploy docs
     uses: alephdata/astro-theme-docs/.github/workflows/docs.yml@main
     permissions:
       contents: read
