@@ -4,12 +4,6 @@ on:
   - push
   - workflow_dispatch
 
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -20,7 +14,8 @@ jobs:
     uses: alephdata/astro-theme-docs/.github/workflows/docs.yml@main
     permissions:
       contents: read
-      pull-requests: write
+      pages: write
+      id-token: write
     with:
       build-path: ./docs
       deploy: ${{ github.ref == 'refs/heads/main' }}
