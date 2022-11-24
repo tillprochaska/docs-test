@@ -11,7 +11,10 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: false,
     extendDefaultPlugins: true,
-    remarkPlugins: [customCodeComponent, defaultClasses],
+    remarkPlugins: [
+      customCodeComponent,
+      defaultClasses,
+    ],
   },
   integrations: [
     mdx({
