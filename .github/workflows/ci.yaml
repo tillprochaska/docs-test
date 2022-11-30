@@ -5,16 +5,37 @@ on:
   - workflow_dispatch
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  docs:
-    uses: alephdata/astro-theme-docs/.github/workflows/docs.yml@main
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    with:
-      build-path: ./docs
-      deploy: ${{ github.ref == 'refs/heads/main' }}
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build docs
+        uses: alephdata/astro-theme-docs/.github/actions/build@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          docs-path: ./docs
+
+  deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy docs
+        id: deployment
+        uses: alephdata/astro-theme-docs/.github/actions/deploy@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
