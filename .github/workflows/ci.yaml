@@ -18,6 +18,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
       - name: Build docs
         uses: alephdata/astro-theme-docs/.github/actions/build@main
         with:
